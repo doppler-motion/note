@@ -30,11 +30,11 @@
 
 - L1和L2正则分别有什么特点？为何L1稀疏？
 
-![](/Users/ydchen/Documents/md_record/问题/imgs/L1_vs_L2_norm.png)
+![](imgs/L1_vs_L2_norm.png)
 
 > > 为何L1稀疏？
 > >
-> > ![](/Users/ydchen/Documents/md_record/问题/imgs/L1_norm_gradient.jpg)
+> > ![](imgs/L1_norm_gradient.jpg)
 > >
 > > 在梯度更新时，不管 L1 的大小是多少（只要不是0）梯度都是1或者-1，所以每次更新时，它都是稳步向0前进。从而导致L1输出稀疏。
 
@@ -149,7 +149,7 @@ https://www.cnblogs.com/eilearn/p/9028394.html
 	
 * **输出不是以0为中心问题**
 
-	![](/Users/ydchen/Documents/md_record/问题/imgs/example4.png)
+	![](imgs/example4.png)
 	
 	> 在 Sigmoid 函数中，输出值恒为正。这也就是说，如果上一级神经元采用 Sigmoid 函数作为激活函数，那么我们无法做到 x0 和 x1 符号相反。此时，模型为了收敛，不得不向逆风前行的风助力帆船一样，走 Z 字形逼近最优解。
 	>
@@ -192,7 +192,7 @@ https://www.cnblogs.com/eilearn/p/9028394.html
 >
 > 在二分类问题中，分类器将一个实例的分类标记为是或否，可以用一个**混淆矩阵**来表示，如下图所示。
 >
-> ![](/Users/ydchen/Documents/md_record/问题/imgs/confusion_matrix.png)
+> ![](imgs/confusion_matrix.png)
 >
 > 把正例正确地分类为正例，表示为TP（true positive），把正例错误地分类为负例，表示为FN（false negative）。
 > 把负例正确地分类为负例，表示为TN（true negative）， 把负例错误地分类为正例，表示为FP（false positive）。
@@ -205,11 +205,11 @@ https://www.cnblogs.com/eilearn/p/9028394.html
 >
 > > 举个例子如下：(true这列表示正例或者负例，hyp这列表示阈值0.5的情况下，概率是否大于0.5)
 > >
-> > ![](/Users/ydchen/Documents/md_record/问题/imgs/example1.png)
+> > ![](imgs/example1.png)
 > >
 > > 那么根据这个表格我们可以计算：TP=6，FN=0，FP=2，TN=2。故recall=6/(6+0)=1,precison=6/(6+2)=0.75，那么得出坐标（1，0.75）。同理得到不同阈下的坐标，即可绘制出曲线。
 > >
-> > ![](/Users/ydchen/Documents/md_record/问题/imgs/PR_curve.png)
+> > <img src="imgs/PR_curve.png" style="zoom:80%;" />
 >
 > 
 >
@@ -226,7 +226,7 @@ https://www.cnblogs.com/eilearn/p/9028394.html
 >
 > 下图为ROC曲线示意图，因现实任务中通常利用有限个测试样例来绘制ROC图，因此应为无法产生光滑曲线，如右图所示。
 >
-> ![](/Users/ydchen/Documents/md_record/问题/imgs/ROC_curve.png)
+> ![](imgs/ROC_curve.png)
 >
 > > 绘图过程：给定m个正例子，n个反例子，根据学习器预测结果进行排序，先把分类阈值设为最大，使得所有例子均预测为反例，此时TPR和FPR均为0，在（0，0）处标记一个点，再将分类阈值依次设为每个样例的预测值，即依次将每个例子划分为正例。设前一个坐标为(x,y)，若当前为真正例，对应标记点为(x,y+1/m)，若当前为假正例，则标记点为（x+1/n,y），然后依次连接各点。
 >
@@ -240,7 +240,7 @@ https://www.cnblogs.com/eilearn/p/9028394.html
 >
 > **PR曲线与ROC曲线的对比**
 >
-> ![](/Users/ydchen/Documents/md_record/问题/imgs/ROC_vs_PR.png)
+> ![](imgs/ROC_vs_PR.png)
 
 >##### AUC
 >
@@ -400,7 +400,7 @@ def get_roc(pos_prob,y_true):
 
 **损失函数的应用场景**
 
-![](/Users/ydchen/Documents/md_record/问题/imgs/loss_func.jpg)
+![](imgs/loss_func.jpg)
 
 
 
@@ -507,13 +507,13 @@ def get_roc(pos_prob,y_true):
 >
 > > 假设要训练这样一个网络：
 > >
-> > ![](/Users/ydchen/Documents/md_record/问题/imgs/example2.png)
+> > ![](imgs/example2.png)
 > >
 > > 正常的流程是：首先把x通过网络前向传播；然后把误差反向传播以决定 如何更新参数 让网络进行学习。
 > >
 > > 使用dropout之后过程变成：
 > >
-> > ![](/Users/ydchen/Documents/md_record/问题/imgs/example3.png)
+> > ![](imgs/example3.png)
 > >
 > > 1. 首先随机（临时）删掉网络中一半的隐藏神经元，输入输出神经元保持不变（下图中虚线为部分临时被删除的神经元）
 > > 2. 然后把输入x通过修改后的网络前向传播，然后把得到的损失结果通过修改的网络反向传播。一小批训练样本执行完这个过程后就按照随机梯度下降法更新（没有被删除的神经元）对应的参数（w，b）。
@@ -633,7 +633,7 @@ def get_roc(pos_prob,y_true):
 
 	> SPP是在SPPNet中提出的，SPPNet提出比较早，在RCNN之后提出的，用于解决重复卷积计算和固定输出的两个问题，具体方法如下图所示：
 	>
-	> ![](/Users/ydchen/Documents/md_record/问题/imgs/SPP_pooling.webp)
+	> ![](imgs/SPP_pooling.webp)
 	>
 	> 在feature map上通过selective search获得窗口，然后将这些区域输入到CNN中，然后进行分类。
 	>
@@ -696,7 +696,7 @@ def get_roc(pos_prob,y_true):
 
 	> 是一种上采样操作
 	>
-	> ![](/Users/ydchen/Documents/md_record/问题/imgs/UnPooling.webp)
+	> ![](imgs/UnPooling.webp)
 	>
 	> 流程描述：
 	>
@@ -733,7 +733,7 @@ def get_roc(pos_prob,y_true):
 	>
 	> 典型的RNN如下图所示：
 	>
-	> ![](/Users/ydchen/Documents/md_record/问题/imgs/RNN_structure.png)
+	> ![](imgs/RNN_structure.png)
 	>
 	> 图中左边是RNN的一个基本模型，右边是模型展开之后的样子。展开是为了与输入样本匹配。
 	>
@@ -761,7 +761,7 @@ def get_roc(pos_prob,y_true):
 
 	> LSTM是为了解决RNN中的反馈消失问题而被提出的模型，它也可以被视为RNN的一个变种。与RNN相比，增加了3个门（gate）：input门，forget门和output门，门的作用就是为了控制之前的隐藏状态、当前的输入等各种信息，确定哪些该丢弃，哪些该保留，如下图表示：
 	>
-	> ![](/Users/ydchen/Documents/md_record/问题/imgs/LSTM_stucture.png)
+	> ![](imgs/LSTM_stucture.png)
 	>
 	> LSTM的隐藏状态g的计算公式：$g = tanh(U^{g}_{X_{t}} + W^{g}_{s_{t-1}})$ 。但是这个隐藏状态的输出受各种门的限制。
 	>
@@ -788,7 +788,7 @@ def get_roc(pos_prob,y_true):
 
 	> GRU具有与LSTM类似的结构，但是更为简化，如下图所示。
 	>
-	> ![](/Users/ydchen/Documents/md_record/问题/imgs/GRU_structure.png)
+	> ![](imgs/GRU_structure.png)
 	>
 	> GRU中状态与输出的计算包含以下步骤。
 	>
@@ -818,27 +818,27 @@ def get_roc(pos_prob,y_true):
 	>
 	> 最易懂的RNN的结构图：
 	>
-	> ![](/Users/ydchen/Documents/md_record/问题/imgs/RNN/RNN.png)
+	> ![](imgs/RNN/RNN.png)
 	>
 	> 简单的RNN内部结构为：
 	>
-	> ![](/Users/ydchen/Documents/md_record/问题/imgs/RNN/RNN_small_structure.png)
+	> ![](imgs/RNN/RNN_small_structure.png)
 	>
-	> ![](/Users/ydchen/Documents/md_record/问题/imgs/RNN/fig1.png)
+	> ![](imgs/RNN/fig1.png)
 	>
-	> ![](/Users/ydchen/Documents/md_record/问题/imgs/RNN/fig2.png)
+	> ![](imgs/RNN/fig2.png)
 	>
 	> 但，当我们推测如下的：小明很喜欢吃蛋挞，所以小明下班后决定去商店__两个蛋挞。这时，不仅需要参考前面的词，还需要参考后面的词，才能推测出中间横线上的词，最大的概率是买。这就需要双向循环神经网络。如下图：
 	>
-	> ![](/Users/ydchen/Documents/md_record/问题/imgs/RNN/Bidirectional_recurrent_neural_network.png)
+	> ![](imgs/RNN/Bidirectional_recurrent_neural_network.png)
 	>
 	> 以及深层神经网络
 	>
-	> ![](/Users/ydchen/Documents/md_record/问题/imgs/RNN/Deep_Bidirectional_recurrent_neural_network.png)
+	> ![](imgs/RNN/Deep_Bidirectional_recurrent_neural_network.png)
 	>
 	> 具体公式实现可参考：https://zybuluo.com/hanbingtao/note/541458
 	>
-	> ![](/Users/ydchen/Documents/md_record/问题/imgs/RNN/fig3.png)
+	> ![](imgs/RNN/fig3.png)
 	>
 	> * LSTM
 	>
@@ -850,9 +850,9 @@ def get_roc(pos_prob,y_true):
 	> 	>
 	> 	>**输出门（output gate）**来控制单元状态有多少输出到LSTM的当前输出值。
 	> 	>
-	> 	>![](/Users/ydchen/Documents/md_record/问题/imgs/RNN/LSTM.png)
+	> 	>![](imgs/RNN/LSTM.png)
 	> 	>
-	> 	>![](/Users/ydchen/Documents/md_record/问题/imgs/RNN/fig4.png)
+	> 	>![](imgs/RNN/fig4.png)
 	> 	>
 	> 	>
 	>
@@ -860,25 +860,25 @@ def get_roc(pos_prob,y_true):
 	>
 	> 	> sigmod函数，0代表舍弃，1代表保留。
 	> 	>
-	> 	> ![](/Users/ydchen/Documents/md_record/问题/imgs/RNN/forget_gate.png)
+	> 	> ![](imgs/RNN/forget_gate.png)
 	> 	>
-	> 	> ![](/Users/ydchen/Documents/md_record/问题/imgs/RNN/fig5.png)
+	> 	> ![](imgs/RNN/fig5.png)
 	>
 	> 	* 输入门
 	>
 	> 	>决定什么样的新信息被存放在细胞状态中。当前输入的单元状态通过 tanh 进行处理（得到一个在 -1 到 1 之间的值）。
 	> 	>
-	> 	>![](/Users/ydchen/Documents/md_record/问题/imgs/RNN/input_gate1.png)
+	> 	>![](imgs/RNN/input_gate1.png)
 	> 	>
 	> 	>计算当前时刻的单元状态：它是由上一次的单元状态按元素乘以遗忘门，再用当前输入的单元状态按元素乘以输入门，再将两个积加和产生的，
 	> 	>
-	> 	>![当前细胞状态](/Users/ydchen/Documents/md_record/问题/imgs/RNN/input_gate2.png)
+	> 	>![当前细胞状态](imgs/RNN/input_gate2.png)
 	>
 	> 	* 输出门
 	>
 	> 	>LSTM最终的输出，是由输出门和单元状态共同确定的：把细胞状态通过 tanh 进行处理（得到一个在 -1 到 1 之间的值）并将它和 sigmoid 门的输出相乘，最终我们仅仅会输出我们确定输出的那部分。
 	> 	>
-	> 	>![](/Users/ydchen/Documents/md_record/问题/imgs/RNN/output_gate.png)
+	> 	>![](imgs/RNN/output_gate.png)
 	> 	>
 	> 	>
 	>
@@ -886,13 +886,13 @@ def get_roc(pos_prob,y_true):
 	>
 	> > 省略了一个门，而且余下的两个门是z,1-z的关系。
 	> >
-	> > ![](/Users/ydchen/Documents/md_record/问题/imgs/RNN/fig7.png)
+	> > ![](imgs/RNN/fig7.png)
 	> >
-	> > ![](/Users/ydchen/Documents/md_record/问题/imgs/RNN/GRU.png)
+	> > ![](imgs/RNN/GRU.png)
 
 * LSTM为什么可以解决梯度消失问题：
 
-	> ![](/Users/ydchen/Documents/md_record/问题/imgs/RNN/fig6.png)
+	> ![](imgs/RNN/fig6.png)
 
 ### 4. lstm中是否可以用relu作为激活函数？
 
@@ -925,7 +925,7 @@ def get_roc(pos_prob,y_true):
 	>
 	> 假设我们输入序列长度为`2`，输出序列长度也为`2`，流程如下：
 	>
-	> <img src="/Users/ydchen/Documents/md_record/问题/imgs/seq2seq/fig1.png" style="zoom:50%;" />
+	> <img src="imgs/seq2seq/fig1.png" style="zoom:50%;" />
 
 * seq to seq
 
@@ -933,7 +933,7 @@ def get_roc(pos_prob,y_true):
 	>
 	> > 以机器翻译为例，假设我们要将`How are you`翻译为`你好吗`，模型要做的事情如下图：
 	> >
-	> > <img src="/Users/ydchen/Documents/md_record/问题/imgs/seq2seq/fig2.jpg" style="zoom:50%;" />
+	> > <img src="imgs/seq2seq/fig2.jpg" style="zoom:50%;" />
 	> >
 	> > 流程说明：
 	> >
@@ -963,11 +963,11 @@ def get_roc(pos_prob,y_true):
 
 	> encoder+decoder，中文名字是编码器和解码器，应用于seq2seq问题，其实就是固定长度的输入转化为固定长度输出。其中encoder和decoder可以采用的模型包括CNN/RNN/BiRNN/GRU/LSTM等，可以根据需要自己的喜好自由组合。
 	>
-	> <img src="/Users/ydchen/Documents/md_record/问题/imgs/seq2seq/encoder_decoder.png" title="encoder-decocder示意图" />
+	> <img src="imgs/seq2seq/encoder_decoder.png" title="encoder-decocder示意图" />
 	>
 	> encoder过程将输入的句子转换为语义中间件，decoder过程根据语义中间件和之前的单词输出，依次输出最有可能的单词组成句子。
 	>
-	> ![](/Users/ydchen/Documents/md_record/问题/imgs/seq2seq/encoder_decoder_theory.png)
+	> ![](imgs/seq2seq/encoder_decoder_theory.png)
 	>
 	> 问题就是当输入长度非常长的时候，这个时候产生的语义中间件效果非常的不好，需要调整。
 
@@ -975,7 +975,7 @@ def get_roc(pos_prob,y_true):
 
 	> attention模型用于解码过程中，它改变了传统decoder对每一个输入都赋予相同向量的缺点，而是根据单词的不同赋予不同的权重。在encoder过程中，输出不再是一个固定长度的中间语义，而是一个由不同长度向量构成的序列，decoder过程根据这个序列子集进行进一步处理。
 	>
-	> ![](/Users/ydchen/Documents/md_record/问题/imgs/seq2seq/encoder_decoder_fame_with_attention.png)
+	> ![](imgs/seq2seq/encoder_decoder_fame_with_attention.png)
 	>
 	> 举例说明：
 	>
@@ -984,12 +984,12 @@ def get_roc(pos_prob,y_true):
 	> >  那么问题来了，如果用传统encoder-decoder模型，那么在翻译Jerry时，所有输入单词对翻译的影响都是相同的，但显然Jerry的贡献度应该更高。
 	> >  引入attention后，每个单词都会有一个权重：（Tom,0.3）(Chase,0.2) (Jerry,0.5)，现在的关键是权重怎么算的呢。
 	> >
-	> > ![](/Users/ydchen/Documents/md_record/问题/imgs/seq2seq/fig3.png)
+	> > ![](imgs/seq2seq/fig3.png)
 	> >
 	> > 从图上可以看出来，加了attention机制以后，encoder层的每一步输出都会和当前的输出进行联立计算（wx+b形式），最后用softmx函数生成概率值。
 	> > 概率值出来了，最后的结果就是一个加权和的形式。
 	> >
-	> > ![](/Users/ydchen/Documents/md_record/问题/imgs/seq2seq/fig4.png)
+	> > ![](imgs/seq2seq/fig4.png)
 	> >
 	> > 基本上所有的attention都采用了这个原理，只不过算权重的函数形式可能会有所不同，但想法相同。
 
@@ -1029,7 +1029,7 @@ def get_roc(pos_prob,y_true):
 
 		> 这个的思路是权重计算之后加了一个tanh激活函数，然后求完权重进行了加和，更加符合attention机制的习惯，其实方法是一样的只不过返回是乘完加和而已。代码来自网上，原作者自己定义了一个attention层。
 		>
-		> ![](/Users/ydchen/Documents/md_record/问题/imgs/seq2seq/fig5.png)
+		> ![](imgs/seq2seq/fig5.png)
 		>
 		> * 代码实现
 		>
@@ -1037,7 +1037,7 @@ def get_roc(pos_prob,y_true):
 		> 	class attention_layers(Layer):
 		> 	    def __init__(self, **kwargs):
 		> 	        super(attention_layers, self).__init__(**kwargs)
-		> 			
+		> 					
 		> 	    def build(self,inputshape):
 		> 	        assert len(inputshape) == 3
 		> 	        #以下是keras的自己开发工作
@@ -1050,14 +1050,14 @@ def get_roc(pos_prob,y_true):
 		> 	                                 initializer='uniform',
 		> 	                                 trainable=True)
 		> 	        super(attention_layers, self).bulid(inputshape)
-		> 			
+		> 					
 		> 	    def call(self,inputs):
 		> 	        x = K.permute_dimensions(inputs, (0, 2, 1))
 		> 	        a = K.softmax(K.tanh(K.dot(x, self.W) + self.b))
 		> 	        outputs = K.permute_dimensions(a*x, (0, 2, 1))
 		> 	        outputs = K.sum(outputs, axis=1)
 		> 	        return  outputs
-		> 			
+		> 					
 		> 	    def compute_output_shape(self, input_shape):
 		> 	        return input_shape[0], input_shape[2]
 		> 	```
@@ -1116,7 +1116,7 @@ def get_roc(pos_prob,y_true):
 
 > 监督学习方法又分生成方法（Generative approach）和判别方法（Discriminative approach），所学到的模型分别称为生成模型（Generative Model）和判别模型（Discriminative Model)。
 
-![](/Users/ydchen/Documents/md_record/问题/imgs/discriminative_denerative/discriminative_vs_generative.jpg)
+![](imgs/discriminative_denerative/discriminative_vs_generative.jpg)
 
 
 
@@ -1138,11 +1138,164 @@ def get_roc(pos_prob,y_true):
 
 ### 1. 集成学习的分类？有什么代表性的模型和方法？
 
+>   集成学习的思路是通过合并多个模型来提升机器学习性能，这种方法相较于当个单个模型通常能够获得更好的预测结果。这也是集成学习在众多高水平的比赛如奈飞比赛，KDD和Kaggle，被首先推荐使用的原因。
+>
+>   一般分为三类：
+>
+>   -   用于减少方差的bagging
+>   -   用于减少偏差的boosting
+>   -   用于提升预测结果的stacking
+>
+>   集成学习方法也可以归为如下两大类：
+>
+>   -   串行集成方法，这种方法串行地生成基础模型（如AdaBoost）。串行集成的基本动机是利用基础模型之间的依赖。通过给错分样本一个较大的权重来提升性能。
+>   -   并行集成方法，这种方法并行地生成基础模型（如Random Forest）。并行集成的基本动机是利用基础模型的独立性，因为通过平均能够较大地降低误差。
+
+*   Bagging
+
+>   Bagging是引导聚合的意思。减少一个估计方差的一种方式就是对多个估计进行平均。
+>
+>   ![](imgs/ensemble_learning/fig1.png)
+>
+>   Bagging使用装袋采样来获取数据子集训练基础学习器。通常分类任务使用投票的方式集成，而回归任务通过平均的方式集成。
+>
+>   下面通过应用Iris数据集的分类问题来距离说明bagging。我们可以使用两种基础模型：决策树和KNN。图像1展示了基础模型与集成模型学习得到的决策边界。
+>
+>   Accuracy: 0.63 (+/- 0.02) [Decision Tree]
+>
+>   Accuracy: 0.70 (+/- 0.02) [K-NN]
+>
+>   Accuracy: 0.64 (+/- 0.01) [Bagging Tree]
+>
+>   Accuracy: 0.59 (+/- 0.07) [Bagging K-NN]
+>
+>   ![](imgs/ensemble_learning/fig2.jpg)
+>
+>   决策树学到的是轴平行边界，然而k=1最近邻对数据拟合的最好。bagging通过训练10个基础模型以及）。**随机选择80%的数据作为训练集，同样随机选择80%的特征进行训练。**
+>
+>   决策树bagging集成相比K-NN bagging集成获得了更高的准确率。K-NN对于训练样本的扰动并不敏感，这也是为什么K-NN成为稳定学习器的原因。
+>
+>   **整合稳定学习器对于提升泛化性能没有帮助。**
+>
+>   图像结果同样展示了通过增加集成模型的个数带来的测试准确率变化。基于交叉验证的结果，我们可以看到整合基础模型个数大于10个之后性能就基本不再提升了，只是带来了计算复杂度的增加。
+>
+>   最后一张图绘制的是集成学习模型的学习曲线，注意训练集数据的平均误差为0.3，在对训练集做80%采样的时候训练集和验证集误差最小。
+
+
+
+*   **Boosting(提高)**
+
+>   Boosting指的是通过算法集合将弱学习器转换为强学习器。boosting的主要原则是训练一系列的弱学习器，所谓弱学习器是指仅比随机猜测好一点点的模型，例如较小的决策树，训练的方式是**利用加权的数据**。在训练的早期对于错分数据给予较大的权重。
+>
+>   对于训练好的弱分类器，如果是分类任务按照权重进行投票，而对于回归任务进行加权，然后再进行预测。boosting和bagging的区别在于是对加权后的数据利用弱分类器依次进行训练。
+>
+>   下面描述的算法是最常用的一种boosting算法，叫做AdaBoost，表示自适应boosting。
+>
+>   ![](imgs/ensemble_learning/fig3.webp)
+>
+>   我们可以看到第一个分类器y1(x)是用相等的权重系数进行训练的。在随后的boosting中，错分的数据权重系数将会增加，正确分类的数据权重系数将会减小。
+>
+>   epsilon表示单个分类器的加权错误率。alpha是分类器的权重，正确的分类器alpha较大。
+>
+>   ![](imgs/ensemble_learning/fig4.webp)
+>
+>   AdaBoost算法的表现如上图所示。每个基础模型包含一个深度为1的决策树，这种决策树依靠线性划分进行分类，决策平面跟其中一个轴平行。上图还展示了集成规模的增加带来的测试准确率变化以及训练和测试集的学习曲线。
+>
+>   梯度树提升（Gradient Tree Boosting）是一个boosting算法在损失函数上的泛化。能够用于分类和回归问题。Gradient Boosting采用串行方式构建模型.
+>   $$
+>   F_{m}(x) = F_{m - 1}(x) + \gamma_{m}h_{m}(x)
+>   $$
+>   每新增一个决策树hm(x)都尽可能的选择是的当前模型Fm-1(x)损失最小的那个：
+>
+>   ![](imgs/ensemble_learning/fig6.jpg)
+>
+>   注意：分类和回归使用的损失函数有所差别。
+
+*   Stacking(堆叠)
+
+>   Stacking是通过一个元分类器或者元回归器来整合多个分类模型或回归模型的集成学习技术。基础模型利用整个训练集做训练，元模型将基础模型的特征作为特征进行训练。
+>
+>   基础模型通常包含不同的学习算法，因此stacking通常是异质集成。算法伪代码如下：
+>
+>   ![](imgs/ensemble_learning/fig7.webp)
+>
+>   ![](imgs/ensemble_learning/fig8.jpg)
+>
+>   各基础模型的预测结果如下：
+>
+>   Accuracy: 0.91 (+/- 0.01) [KNN]
+>
+>   Accuracy: 0.91 (+/- 0.06) [Random Forest]
+>
+>   Accuracy: 0.92 (+/- 0.03) [Naive Bayes]
+>
+>   Accuracy: 0.95 (+/- 0.03) [Stacking Classifier]
+>
+>   Stacking集成效果如上图所示。分别在K-NN，Random Forest,Naive Bayes做训练和预测，然后将其输出结果作为特征，利用逻辑回归作为元模型进一步训练。如图所示，stacking集成的结果由于每个基础模型，并且没有过拟合。
+>
+>   Stacking被Kaggle竞赛获奖者广泛使用。例如，Otto Group Product分类挑战赛的第一名通过对30个模型做stacking赢得了冠军。他将30个模型的输出作为特征，继续在三个模型中训练，这三个模型XGBoost，Neural Network和Adaboost，最后再加权平均。详见文章([https://www.kaggle.com/c/otto-group-product-classification-challenge/discussion/14335](https://link.zhihu.com/?target=https%3A//www.kaggle.com/c/otto-group-product-classification-challenge/discussion/14335))。
+
+>   代码参考
+>
+>   https://github.com/vsmolyakov/experiments_with_python/blob/master/chp01/ensemble_methods.ipynb
+
 ### 2. 如何从偏差和方差的角度解释bagging和boosting的原理？
+
+*   什么是集成学习？
+
+    >   集成学习通过构建并结合多个学习器来完成学习任务，有时也被称为多分类器系统、基于委员会的学习。只包含同种类型的个体学习器，这样的集成是“同质”的；包含不同类型的个体学习器，这样的集成是“异质”的。集成学习通过将多个学习器进行结合，常可获得比单一学习器显著优越的泛化性能。这对“弱学习器”（弱学习器常指泛化性能略优于随机猜测的学习器）尤为明显。要获得好的集成，学习器之间要具有差异性。根据个体学习器的生成方式，目前的集成学习方法大致可分为两大类，即个体学习器间存在强依赖关系、必须串行生成的序列化方法，以及个体学习器间不存在强依赖关系、可同时生成的并行化方法；前者的代表是Boosting，后者的代表是Bagging和“随机森林”。
+
+*   什么是boosting？
+
+    >   Boosting是一族可将弱学习器提升为强学习器的算法。
+    >   关于Boosting的工作机制：
+    >   1）提高那些在前一轮被弱分类器分错样例的权值，减小前一轮分对样本的权值，使误分的样本在后续受到更多的关注。
+    >   2）加法模型将弱分类器进行线性组合，比如AdaBoost通过加权多数表决的方式，即增大错误率小的分类器的权值，同时减小错误率较大的分类器的权值。
+    >   如此反复（1）、（2），直到满足训练停止条件。
+    >   需要注意的是：Boosting算法在训练的每一轮要检查当前生成的基学习器是否满足基本条件（比如：检查当前分类器是否比随机猜测好）
+
+*   什么是Bagging
+
+    >   Bagging即套袋法，其算法过程如下：
+    >   1）从原始样本集中抽取训练集。每轮从原始样本集中使用Bootstraping法（即自助法，是一种有放回的抽样方法，可能抽到重复的样本）抽取n个训练样本（在训练集中，有些样本可能被多次抽取到，而有些样本可能一次都没有被抽中）.共进行k轮抽取，得到k个训练集.（k个训练集相互独立）
+    >   2）每次使用一个训练集得到一个模型，k个训练集共得到k个模型.（注：根据具体问题采用不同的分类或回归方法，如决策树、神经网络等）
+    >   3）对分类问题：将上步得到的k个模型采用投票的方式得到分类结果；对回归问题，计算上述模型的均值作为最后的结果。
+    >   Bagging的典型代表是随机森林：
+    >   随机森林改变了决策树容易过拟合的问题，这主要是由两个操作所优化的：
+    >   1、Boostrap从袋内有放回的抽取样本值
+    >   2、每次随机抽取一定数量的特征（通常为sqr(n)）
+    >   分类问题：采用Bagging投票的方式选择类别频次最高的
+    >   回归问题：直接取每颗树结果的平均值
+
+*   区别
+
+    >   1）偏差—方差
+    >   Boosting：从偏差—方差分解角度看，降低偏差。
+    >   Bagging：从偏差—方差分解角度看，降低方差。
+    >   2）样本选择：
+    >   Boosting：每一轮的训练集不变，只是训练集中每个样例在分类器中的权重发生变化.而权值是根据上一轮的分类结果进行调整。
+    >   Bagging：训练集是在原始集中有放回选取的，从原始集中选出的各轮训练集之间是独立的。
+    >   3）样例权重：
+    >   Boosting：根据错误率不断调整样例的权值，错误率越大则权重越大。
+    >   Bagging：使用均匀取样，每个样例的权重相等
+    >   4）基学习器权重：
+    >   Boosting：每个弱分类器都有相应的权重，对于分类误差小的分类器会有更大的权重.
+    >   Bagging：所有弱分类器的权重相等.
+    >   5）串、并行计算：
+    >   Boosting：串行，各个及学习器只能顺序生成，因为后一个模型参数需要前一轮模型的结果。
+    >   Bagging：各个预测函数可以并行生成。
 
 ### 3. GBDT的原理？和Xgboost的区别联系？
 
+>   参考链接
+>
+>   https://blog.csdn.net/u011094454/article/details/78948989
+
 ### 4. adaboost和gbdt的区别联系？
+
+>   参考链接
+>
+>   https://zhuanlan.zhihu.com/p/31639299
 
 ## 模型
 
