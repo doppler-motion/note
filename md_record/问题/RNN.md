@@ -27,8 +27,8 @@
     > 图中左边是RNN的一个基本模型，右边是模型展开之后的样子。展开是为了与输入样本匹配。
     >
     > > * $ x_{t} $代表输入序列中的第t步元素，例如语句中的一个汉字。一般使用一个one-hot向量来表示，向量的长度是训练所用的汉字的总数（或称之为字典大小），而唯一为1的向量元素代表当前的汉字。
-    > > * $ s_{t} $代表第t步的隐藏状态，其计算公式为$s_{t}=tanh(U_{X_{t}} + W_{S_{t-1}})$。也就是说，当前的隐藏状态由前一个状态和当前输入计算得到。考虑每一步隐藏状态的定义，可以把$s_{t}$视为一块内存，它保存了之前所有步骤的输入和隐藏状态信息。$s_{-1}$是初始状态，被设置为全0。
-    > > * $o_{t}$是第t步的输出。可以把它看作是对第 t+1 步的输入的预测，计算公式为：$o_{t} = softmax(V_{s_{t}})$。可以通过比较$o_{t}$ 和$x_{t+1}$之间的误差来训练模型
+    > > * $ s_{t} $代表第t步的隐藏状态，其计算公式为$s_{t}=tanh(UX_{t} + WS_{t-1})$。也就是说，当前的隐藏状态由前一个状态和当前输入计算得到。考虑每一步隐藏状态的定义，可以把$s_{t}$视为一块内存，它保存了之前所有步骤的输入和隐藏状态信息。$s_{-1}$是初始状态，被设置为全0。
+    > > * $o_{t}$是第t步的输出。可以把它看作是对第 t+1 步的输入的预测，计算公式为：$o_{t} = softmax(Vs_{t})$。可以通过比较$o_{t}$ 和$x_{t+1}$之间的误差来训练模型
     > > * U, V, W 是RNN的参数，并且在展开之后的每一步中依然保持不变。这就大大减少了RNN中参数的数量
     >
     > * 举例
@@ -52,14 +52,14 @@
     >
     > ![](imgs/deep_learning/RNN/LSTM_stucture.png)
     >
-    > LSTM的隐藏状态g的计算公式：$g = tanh(U^{g}_{X_{t}} + W^{g}_{s_{t-1}})$ 。但是这个隐藏状态的输出受各种门的限制。
+    > LSTM的隐藏状态g的计算公式：$g = tanh(U_{g}X_{t} + W_{g}s_{t-1})$ 。但是这个隐藏状态的输出受各种门的限制。
     >
     > 内部存储用$c$来表示，它由前一步的内部存储和当前的隐藏状态计算得出，并且受到input门和forget门的控制。前者确定当前隐藏状态中需要保留的信息，后者确定前一步的内部存储中需要保留的信息:$c_{t}= c_{t-1}·f + g · i$。 LSTM的输出则使用$s_{t}$ 表示，并且受输出们的限制：$s_{t} = tanh(c_{t}) · o$。综上所述，第t步的LSTM种输出信息的计算公式如下：
     >
-    > * $i = \sigma(U^{i}_{X_{t}} + W^{i}_{S_{t - 1}})$
-    > * $f = \sigma(U^{f}_{X_{t}} + W^{f}_{S_{t - 1}})$
-    > * $o = \sigma(U^{o}_{X_{t}} + W^{o}_{S_{t - 1}})$
-    > * $g = tanh(U^{g}_{X_{t}} + W^{g}_{S_{t - 1}})$
+    > * $i = \sigma(U_{i}X_{t} + W_{i}S_{t - 1})$
+    > * $f = \sigma(U_{f}X_{t} + W_{f}S_{t - 1})$
+    > * $o = \sigma(U_{o}X_{t} + W_{o}S_{t - 1})$
+    > * $g = tanh(U_{g}X_{t} + W_{g}S_{t - 1})$
     > * $c_{t}= c_{t-1}·f + g · i$
     > * $s_{t}= tanh(c_{t})·o$
     >
@@ -81,9 +81,9 @@
     >
     > GRU中状态与输出的计算包含以下步骤。
     >
-    > * $z = \sigma(U^{z}_{x_{t}} + W^{z}_{s_{t - 1}})$
-    > * $r = \sigma(U^{r}_{x_{t}} + W^{r}_{s_{t - 1}})$
-    > * $h = tanh(U^{h}_{x_{t}} + W^{h}_{s_{t - 1} · r})$
+    > * $z = \sigma(U_{z}x_{t} + W_{z}s_{t - 1})$
+    > * $r = \sigma(U_{r}x_{t} + W_{r}s_{t - 1})$
+    > * $h = {\rm tanh}(U_{h}x_{t} + W_{h}(s_{t - 1} · r))$
     > * $ s_{t} = (1 - z) · h + z · s_{t - 1}$
 
     * 与LSTM相比，GRU存在着下述特点。
@@ -330,7 +330,7 @@
         >     class attention_layers(Layer):
         >         def __init__(self, **kwargs):
         >             super(attention_layers, self).__init__(**kwargs)
-        >     
+        >             
         >         def build(self,inputshape):
         >             assert len(inputshape) == 3
         >             #以下是keras的自己开发工作
@@ -343,14 +343,14 @@
         >                                      initializer='uniform',
         >                                      trainable=True)
         >             super(attention_layers, self).bulid(inputshape)
-        >     
+        >             
         >         def call(self,inputs):
         >             x = K.permute_dimensions(inputs, (0, 2, 1))
         >             a = K.softmax(K.tanh(K.dot(x, self.W) + self.b))
         >             outputs = K.permute_dimensions(a*x, (0, 2, 1))
         >             outputs = K.sum(outputs, axis=1)
         >             return  outputs
-        >     
+        >             
         >         def compute_output_shape(self, input_shape):
         >             return input_shape[0], input_shape[2]
         >     ```
