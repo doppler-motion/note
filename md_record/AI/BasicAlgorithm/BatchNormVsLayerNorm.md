@@ -1,4 +1,4 @@
-### 26. BN的原理、作用；手动推导
+### 1. BN的原理、作用；手动推导
 
 >   参考：[(3条消息) BatchNormalization、LayerNormalization、InstanceNorm、GroupNorm、SwitchableNorm总结_夏洛的网的博客-CSDN博客](https://blog.csdn.net/liuxiao214/article/details/81037416)
 >
@@ -12,7 +12,7 @@
 *   控制梯度爆炸防止梯度消失
 *   防止过拟合
 
-### 27. BN在前向传播和后向传播中的区别
+### 2. BN在前向传播和后向传播中的区别
 
 >   BN（Batch Normalization）是一种常用的神经网络优化技术，用于加速深度神经网络的训练并提高模型的准确性。BN在前向传播和反向传播中的作用是不同的。
 >   在前向传播期间，BN计算每个batch的均值和方差，并标准化输入数据。标准化后的数据可以使后续层的输入在同一分布上，并加速网络的训练。BN公式如下：
